@@ -3,8 +3,12 @@ package com.rezajax.college.boy2;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,18 +25,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.rezajax.college.boy2.HomeFragment;
+import com.rezajax.college.boy2.SettingFragment;
+import com.rezajax.college.boy2.AccountFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private final String url_cat = "http://rezajax.ir/boy2/get_cat.php";
     private final String url_powerpoint = "";
 
+    ViewPager viewPager;
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        viewPager = findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +75,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.getMenu().getItem(0).setChecked(true);//sets "Map" as checked
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
-
 
 
         make_category_list();
@@ -98,9 +118,15 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_home:
                 fragment = new HomeFragment();
+                make_category_list();
                 break;
             case R.id.nav_setting:
                 fragment = new SettingFragment();
+                viewPager = findViewById(R.id.viewpager);
+                setupViewPager(viewPager);
+
+                tabLayout = findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(viewPager);
                 break;
             case R.id.nav_account:
                 fragment = new AccountFragment();
@@ -190,4 +216,44 @@ public class MainActivity extends AppCompatActivity
         t1.start();
 
     }
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment(), "ONE");
+        adapter.addFragment(new AccountFragment(), "TWO");
+        adapter.addFragment(new SettingFragment(), "THREE");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 }
+
+
