@@ -53,7 +53,7 @@ public class JSONDownloader {
         }
         catch ( Exception e )
         {
-              Log.i( "MatiMessage" , "error in JSONDownloader in downloadURL() -> " + e.toString() );
+              Log.i( "jax" , "error in JSONDownloader in downloadURL() -> " + e.toString() );
         }
 
         return data;

@@ -30,14 +30,16 @@ public class CatParser
 
                 cat.put( "id" , temp.getString("id") );
                 cat.put( "name" , temp.getString( "name" ) );
-                cat.put( "amount" , "[" + temp.getString( "amount" ) + "]" );
+                cat.put( "PowerPoint" , "[" + temp.getString( "PowerPoint" ) + "]" );
+                cat.put( "learn" , "[" + temp.getString( "learn" ) + "]" );
+                cat.put( "sum" , "[" + temp.getString( "sum" ) + "]" );
 
                 all_cats.add( cat );
             }
         }
         catch ( Exception e )
         {
-              Log.i("MatiMessage", "error in CatParser in parser() -> " + e.toString() );
+              Log.i("jax", "error in CatParser in parser() -> " + e.toString() );
         }
 
         return ( all_cats );

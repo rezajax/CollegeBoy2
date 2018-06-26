@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.getMenu().getItem(0).setChecked(true);//sets "Map" as checked
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
+
+
+        make_category_list();
     }
 
     @Override
@@ -141,14 +147,47 @@ public class MainActivity extends AppCompatActivity
 
 
     public void make_category_list () {
-        JSONDownloader downloader = new JSONDownloader();
-        String tmp = downloader.downloadURL( url_cat );
 
-        CatParser catParser = new CatParser();
-        List<HashMap<String , Object>> cats =
-                new ArrayList<>();
 
-        cats = catParser.parse( tmp );
+
+        Thread t1 = new Thread(
+            new Runnable() {
+                @Override
+                public void run() {
+
+                    JSONDownloader downloader = new JSONDownloader();
+                    String tmp = downloader.downloadURL( url_cat );
+
+                    CatParser catParser = new CatParser();
+
+                    List<HashMap<String , Object>> cats;
+                    cats = catParser.parse( tmp );
+
+                    String[] from = {"name" , "sum" }; //"name" , "PowerPoint" , "learn" , "sum"
+                    int[] to = { R.id.name_cat, R.id.amount_cat };
+
+                    final SimpleAdapter myAdapter = new SimpleAdapter(
+                            getBaseContext() , cats , R.layout.cat_list_row , from , to
+                    );
+
+                    final ListView lv = (ListView) findViewById(R.id.category_list);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            lv.setAdapter(myAdapter);
+
+                        }
+                    });
+
+
+                }
+            }
+        );
+
+
+        t1.start();
 
     }
 }
