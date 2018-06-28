@@ -1,5 +1,6 @@
 package com.rezajax.college.boy2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,13 @@ public class MainActivity extends AppCompatActivity
 
     ViewPager viewPager;
     TabLayout tabLayout;
+
+    private int[] tabIcons = {
+            R.drawable.ic_home,
+            R.drawable.ic_account,
+            R.drawable.ic_exit
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +86,7 @@ public class MainActivity extends AppCompatActivity
 
 
         make_category_list();
+        //setupTabIcons();
     }
 
     @Override
@@ -121,6 +130,9 @@ public class MainActivity extends AppCompatActivity
                 make_category_list();
                 break;
             case R.id.nav_setting:
+                Intent intent = new Intent(MainActivity.this , BlankActivity.class);
+                MainActivity.this.startActivity(intent);
+
                 fragment = new SettingFragment();
                 viewPager = findViewById(R.id.viewpager);
                 setupViewPager(viewPager);
@@ -215,6 +227,12 @@ public class MainActivity extends AppCompatActivity
 
         t1.start();
 
+
+    }
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 
 
@@ -223,6 +241,13 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new HomeFragment(), "ONE");
         adapter.addFragment(new AccountFragment(), "TWO");
         adapter.addFragment(new SettingFragment(), "THREE");
+        adapter.addFragment(new AccountFragment(), "THREE");
+        adapter.addFragment(new AccountFragment(), "FOUR");
+        adapter.addFragment(new AccountFragment(), "FIVE");
+        adapter.addFragment(new AccountFragment(), "SIX");
+        adapter.addFragment(new AccountFragment(), "SEVEN");
+        adapter.addFragment(new AccountFragment(), "EIGHT");
+        adapter.addFragment(new AccountFragment(), "NINE");
         viewPager.setAdapter(adapter);
     }
 
