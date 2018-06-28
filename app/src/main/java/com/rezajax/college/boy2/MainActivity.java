@@ -26,10 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.rezajax.college.boy2.HomeFragment;
-import com.rezajax.college.boy2.SettingFragment;
-import com.rezajax.college.boy2.AccountFragment;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -81,11 +77,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view); //initializes list of items in navigationdrawer
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.getMenu().getItem(0).setChecked(true);//sets "Map" as checked
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        navigationView.getMenu().getItem(0).setChecked(true);//sets "Main" as checked
+        onNavigationItemSelected(navigationView.getMenu().getItem(0)); //run Main fragment
 
 
-        make_category_list();
+        //make_category_list();
         //setupTabIcons();
     }
 
@@ -114,14 +110,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void dispalySelectedScreen (int id) {
+    private void displaySelectedScreen(int id) {
         Fragment fragment = null;
 
         switch (id) {
@@ -129,20 +125,22 @@ public class MainActivity extends AppCompatActivity
                 fragment = new HomeFragment();
                 make_category_list();
                 break;
+            case R.id.nav_account:
+                fragment = new AccountFragment();
+                break;
             case R.id.nav_setting:
                 Intent intent = new Intent(MainActivity.this , BlankActivity.class);
                 MainActivity.this.startActivity(intent);
 
                 fragment = new SettingFragment();
                 viewPager = findViewById(R.id.viewpager);
+                /*
                 setupViewPager(viewPager);
-
                 tabLayout = findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(viewPager);
+                */
                 break;
-            case R.id.nav_account:
-                fragment = new AccountFragment();
-                break;
+
             case R.id.nav_exit:
                 finish();
         }
@@ -171,15 +169,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_setting) {
 
-        } else if (id == R.id.nav_setting) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
 
-        dispalySelectedScreen(id);
+        displaySelectedScreen(id);
         return true;
     }
 
@@ -239,9 +235,8 @@ public class MainActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "ONE");
-        adapter.addFragment(new AccountFragment(), "TWO");
+        adapter.addFragment(new SettingFragment(), "TWO"); //line 2 is problem title AppBar
         adapter.addFragment(new SettingFragment(), "THREE");
-        adapter.addFragment(new AccountFragment(), "THREE");
         adapter.addFragment(new AccountFragment(), "FOUR");
         adapter.addFragment(new AccountFragment(), "FIVE");
         adapter.addFragment(new AccountFragment(), "SIX");
