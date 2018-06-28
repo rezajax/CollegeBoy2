@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
 
-    <include layout="@layout/content_blank" />
+    <include layout="@layout/app_bar_blank" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -19,14 +19,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 
 
