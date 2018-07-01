@@ -1,6 +1,7 @@
 package com.rezajax.college.boy2;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +24,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import com.rezajax.college.boy2.Downloader.CatParser;
+import com.rezajax.college.boy2.Downloader.JSONDownloader;
+import com.rezajax.college.boy2.Fragment.AccountFragment;
+import com.rezajax.college.boy2.Fragment.HomeFragment;
+import com.rezajax.college.boy2.Fragment.SettingFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,9 +90,28 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);//sets "Main" as checked
         onNavigationItemSelected(navigationView.getMenu().getItem(0)); //run Main fragment
 
+        MenuItem nav_home = findViewById(R.id.nav_home);
+       // applyFontToMenuItem(nav_home);
+
+        TextView tx = findViewById(R.id.name_cat);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/AdobeArabic-Regular.ttf");
+//        tx.setTypeface(font);
 
         //make_category_list();
         //setupTabIcons();
+    }
+
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/irsans.ttf");
+//        Typeface font = getResources().getFont(R.font.irsans);
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -123,13 +152,17 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_home:
                 fragment = new HomeFragment();
+
+//                HomeFragment fm = new HomeFragment() ;
+//                fm.make_category_list();
+
                 make_category_list();
                 break;
             case R.id.nav_account:
                 fragment = new AccountFragment();
                 break;
             case R.id.nav_setting:
-                Intent intent = new Intent(MainActivity.this , BlankActivity.class);
+                Intent intent = new Intent(MainActivity.this , SettingActivity.class);
                 MainActivity.this.startActivity(intent);
 
                 fragment = new SettingFragment();
@@ -242,7 +275,7 @@ public class MainActivity extends AppCompatActivity
         adapter.addFragment(new AccountFragment(), "SIX");
         adapter.addFragment(new AccountFragment(), "SEVEN");
         adapter.addFragment(new AccountFragment(), "EIGHT");
-        adapter.addFragment(new AccountFragment(), "NINE");
+        adapter.addFragment(new HomeFragment(), "NINE");
         viewPager.setAdapter(adapter);
     }
 

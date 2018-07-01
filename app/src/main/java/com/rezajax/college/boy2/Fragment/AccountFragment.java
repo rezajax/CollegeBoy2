@@ -1,4 +1,4 @@
-package com.rezajax.college.boy2;
+package com.rezajax.college.boy2.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,20 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeFragment extends Fragment {
+import com.rezajax.college.boy2.R;
+
+public class AccountFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Home");
+        getActivity().setTitle("Account");
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_acount, container, false);
     }
 
 
