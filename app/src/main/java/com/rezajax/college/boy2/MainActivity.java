@@ -1,5 +1,6 @@
 package com.rezajax.college.boy2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.View;
@@ -39,6 +43,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static RecyclerView.Adapter sAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    public static RecyclerView sRecyclerView;
+    static View.OnClickListener myOnClickListener;
+
+    private CustomAdapter mCustomAdapter;
+
     private final String url_cat = "http://rezajax.ir/boy2/get_cat.php";
     private final String url_powerpoint = "";
 
@@ -57,15 +68,65 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /*int a = 1;
+
+        sRecyclerView = findViewById(R.id.my_recycler);
+        mCustomAdapter = new CustomAdapter(a);
+        mLayoutManager= new LinearLayoutManager(getApplicationContext());
+        sRecyclerView.setLayoutManager(mLayoutManager);
+        sRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        sRecyclerView.setAdapter(mCustomAdapter);*/
+
+        Thread t1 = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                        JSONDownloader downloader = new JSONDownloader();
+                        String tmp = downloader.downloadURL( url_cat );
+
+                        CatParser catParser = new CatParser();
+
+                        List<HashMap<String , Object>> cats;
+                        cats = catParser.parse( tmp );
+
+                        List<HashMap<String , Object>> all_cats =
+                                new ArrayList<>();
+                        HashMap<String , Object> cat = new HashMap<>();
+
+                        cat.put( "name" , "name" );
+                        cat.put( "messege" , "messege"  );
+                        cat.put( "image" , "[" + "image" );
+
+
+                        all_cats.add( cat );
+
+
+
+                        int a = 1;
+
+                        sRecyclerView = findViewById(R.id.my_recycler);
+                        mCustomAdapter = new CustomAdapter(cats);
+                        mLayoutManager= new LinearLayoutManager(getApplicationContext());
+                        sRecyclerView.setLayoutManager(mLayoutManager);
+                        sRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        sRecyclerView.setAdapter(mCustomAdapter);
+                    }
+                }
+        );
+
+
+        t1.start();
+
+
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        viewPager = findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
 
 
 
@@ -156,7 +217,7 @@ public class MainActivity extends AppCompatActivity
 //                HomeFragment fm = new HomeFragment() ;
 //                fm.make_category_list();
 
-                make_category_list();
+                //make_category_list();
                 break;
             case R.id.nav_account:
                 fragment = new AccountFragment();
@@ -176,13 +237,6 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_exit:
                 finish();
-        }
-
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.nav_container , fragment);
-            ft.commit();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -305,6 +359,16 @@ public class MainActivity extends AppCompatActivity
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
+        }
+    }
+
+    private class MyonClickListener implements View.OnClickListener {
+        public MyonClickListener(Context context) {
+        }
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 }
