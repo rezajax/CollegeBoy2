@@ -40,9 +40,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewMessage = holder.mTextViewVersion;
         ImageView imageView = holder.mImageView;
 
-        textViewName.setText(R.string.app_name);
-        textViewName.setText(R.string.navigation_drawer_open);
-        imageView.setImageResource(R.drawable.profile);
+//        textViewName.setText(R.string.app_name);
+//        textViewName.setText(R.string.navigation_drawer_open);
+        imageView.setImageResource(R.drawable.kratos);
     }
 
     @Override
@@ -61,7 +61,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
             this.mTextViewName = itemView.findViewById(R.id.card_text_header);
-            this.mTextViewVersion = itemView.findViewById(R.id.card_text_message);
             this.mImageView = itemView.findViewById(R.id.card_image);
         }
     }

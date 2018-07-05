@@ -2,6 +2,8 @@ package com.rezajax.college.boy2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,13 +12,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +37,7 @@ import com.rezajax.college.boy2.Downloader.JSONDownloader;
 import com.rezajax.college.boy2.Fragment.AccountFragment;
 import com.rezajax.college.boy2.Fragment.HomeFragment;
 import com.rezajax.college.boy2.Fragment.SettingFragment;
+import com.rezajax.college.boy2.Justifie.JustifiedTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,11 +65,15 @@ public class MainActivity extends AppCompatActivity
             R.drawable.ic_exit
     };
 
+    private JustifiedTextView mJTv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
         /*int a = 1;
