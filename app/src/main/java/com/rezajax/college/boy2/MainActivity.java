@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     public static RecyclerView sRecyclerView;
     static View.OnClickListener myOnClickListener;
 
+
     private CustomAdapter mCustomAdapter;
 
     private final String url_cat = "http://rezajax.ir/boy2/get_cat.php";
@@ -113,9 +114,15 @@ public class MainActivity extends AppCompatActivity
 
                         int a = 1;
 
+                        myOnClickListener = new MyonClickListener(MainActivity.this);
+
                         sRecyclerView = findViewById(R.id.my_recycler);
                         mCustomAdapter = new CustomAdapter(cats);
                         mLayoutManager= new LinearLayoutManager(getApplicationContext());
+
+                        //mLayoutManager =
+                          //      new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
                         sRecyclerView.setLayoutManager(mLayoutManager);
                         sRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         sRecyclerView.setAdapter(mCustomAdapter);
@@ -370,11 +377,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     private class MyonClickListener implements View.OnClickListener {
+        private final Context mContext;
+
         public MyonClickListener(Context context) {
+            this.mContext = context;
         }
 
         @Override
         public void onClick(View v) {
+//            int selectedItemPosition = sRecyclerView.getChildPosition(v);
+//            RecyclerView.ViewHolder viewHolder =  sRecyclerView.findViewHolderForPosition(selectedItemPosition);
+
+            int selectedItemPosition = sRecyclerView.getChildLayoutPosition(v);
+            RecyclerView.ViewHolder viewHolder =  sRecyclerView.findViewHolderForLayoutPosition(selectedItemPosition);
+
+            TextView textView =
+                    viewHolder.itemView.findViewById(R.id.card_text_header);
+
+            Intent intent = new Intent(MainActivity.this , ScrollingActivity.class);
+            MainActivity.this.startActivity(intent);
 
         }
     }
