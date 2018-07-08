@@ -77,10 +77,10 @@ public class RecyclerFragment extends Fragment {
 
                         myOnClickListener = new MyonClickListener(getActivity());
 
-                        sRecyclerView = v.findViewById(R.id.my_recycler);
+                        sRecyclerView = v.findViewById(R.id.my_recycler); //ok
                         //myOnClickListener = new MyonClickListener(MainActivity.this);
-                        mCustomAdapter = new CustomAdapter(cats);
-                        mLayoutManager= new LinearLayoutManager(getActivity());
+                        mCustomAdapter = new CustomAdapter(getContext(), cats);
+                        mLayoutManager= new LinearLayoutManager(getActivity()); //ok
 //                        RecyclerView.LayoutManager mLayoutManager =
 //                                new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         sRecyclerView.setLayoutManager(mLayoutManager);

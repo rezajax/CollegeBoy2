@@ -12,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ import com.rezajax.college.boy2.Downloader.CatParser;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
 import com.rezajax.college.boy2.Fragment.AccountFragment;
 import com.rezajax.college.boy2.Fragment.HomeFragment;
+import com.rezajax.college.boy2.Fragment.RecyclerFragment;
 import com.rezajax.college.boy2.Fragment.SettingFragment;
 import com.rezajax.college.boy2.Justifie.JustifiedTextView;
 
@@ -75,18 +77,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
+        Fragment fm = new RecyclerFragment(); //RecyclerFragment fm = new RecyclerFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.frame_fragment, fm).commit();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.add(R.id.frame_fragment, fm).commit();
 
 
-        /*int a = 1;
-
-        sRecyclerView = findViewById(R.id.my_recycler);
-        mCustomAdapter = new CustomAdapter(a);
-        mLayoutManager= new LinearLayoutManager(getApplicationContext());
-        sRecyclerView.setLayoutManager(mLayoutManager);
-        sRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        sRecyclerView.setAdapter(mCustomAdapter);*/
-
-        Thread t1 = new Thread(
+        /*Thread t1 = new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         );
 
 
-        t1.start();
+        t1.start();*/
 
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".MainActivity"
     android:orientation="vertical">
 
@@ -21,6 +22,8 @@
 
             android:id="@+id/toolbar"
             app:logoDescription="@string/app_name"
+
+            app:layout_scrollFlags="scroll|enterAlways"
 
             android:layout_gravity="right"
             android:layout_width="match_parent"
@@ -61,6 +64,7 @@
             </LinearLayout>
 
 
+
             <!--<ImageView
                 android:layout_width="wrap_content"
                 android:contentDescription="@string/app_name"
@@ -73,10 +77,23 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include
+<!--    <include
         layout="@layout/recycler_main2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
+
+
+
+
+    <!--android:paddingTop="?android:attr/actionBarSize"-->
+    <FrameLayout
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:id="@+id/frame_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
