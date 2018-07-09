@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <!--app:logo="@drawable/kratos"-->
-
+        <!--app:layout_scrollFlags="scroll|enterAlways"-->
         <android.support.v7.widget.Toolbar
             app:contentInsetStartWithNavigation="0dp"
             app:contentInsetLeft="0dp"
@@ -23,7 +23,6 @@
             android:id="@+id/toolbar"
             app:logoDescription="@string/app_name"
 
-            app:layout_scrollFlags="scroll|enterAlways"
 
             android:layout_gravity="right"
             android:layout_width="match_parent"

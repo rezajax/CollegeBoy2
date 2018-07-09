@@ -2,15 +2,25 @@ package com.rezajax.college.boy2;
 
 public class DataModel {
     String name;
-    String version;
+    String header;
+    String text;
     int id;
     int image;
 
-    public DataModel(String name, String version, int id, int image) {
+    public DataModel(String name, String header, String text, int id, int image) {
         this.name = name;
-        this.version = version;
+        this.header = header;
+        this.text = text;
         this.id = id;
         this.image = image;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getName() {
@@ -21,12 +31,12 @@ public class DataModel {
         this.name = name;
     }
 
-    public String getVersion() {
-        return version;
+    public String getHeader() {
+        return header;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public int getId() {

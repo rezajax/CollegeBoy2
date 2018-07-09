@@ -1,6 +1,7 @@
 package com.rezajax.college.boy2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,11 +18,11 @@ import java.util.List;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-    private List<HashMap<String , Object>> postset;
+    private List<List<String>> postset;
     Context mContext;
 
 
-    public CustomAdapter(Context mContext, List<HashMap<String , Object>> post ) { //creator method
+    public CustomAdapter(Context mContext, List<List<String>> post ) { //creator method
         this.mContext = mContext;
         this.postset = post;
     }
@@ -40,6 +41,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, String.format("LinearLayout_profile%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
+            }
+        });
+
+        myViewHolder.mPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext , ScrollingActivity.class);
+                mContext.startActivity(intent);
+
+                Toast.makeText(mContext, String.format("LinearLayout_post", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
             }
         });
 
@@ -67,6 +78,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout mProfile;
+        LinearLayout mPost;
         TextView mTextViewName ;
         TextView mTextViewVersion;
         ImageView mImageView;
@@ -74,6 +86,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
             this.mProfile = itemView.findViewById(R.id.card_profile);
+            this.mPost = itemView.findViewById(R.id.card_post);
             this.mTextViewName = itemView.findViewById(R.id.card_text_header);
             this.mImageView = itemView.findViewById(R.id.card_image);
         }

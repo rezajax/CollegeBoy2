@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rezajax.college.boy2.CustomAdapter;
+import com.rezajax.college.boy2.DataModel;
 import com.rezajax.college.boy2.Downloader.CatParser;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
+import com.rezajax.college.boy2.Downloader.PostParser;
 import com.rezajax.college.boy2.MainActivity;
 import com.rezajax.college.boy2.R;
 import com.rezajax.college.boy2.ScrollingActivity;
@@ -38,7 +41,7 @@ public class RecyclerFragment extends Fragment {
 
     private CustomAdapter mCustomAdapter;
 
-    private final String url_cat = "http://rezajax.ir/boy2/get_cat.php";
+    private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=ASC";
     private final String url_powerpoint = "";
 
 
@@ -48,16 +51,34 @@ public class RecyclerFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recycler, container, false);
 
+        Thread t1 = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
 
 
 
                         JSONDownloader downloader = new JSONDownloader();
                         String tmp = downloader.downloadURL( url_cat );
 
-                        CatParser catParser = new CatParser();
+                        PostParser catParser = new PostParser();
 
-                        List<HashMap<String , Object>> cats;
-                        cats = catParser.parse( tmp );
+                        List<List<String>>  post;
+                        post = catParser.parse( tmp );
+
+                        Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
+
+
+
+                        List<String> list = new ArrayList<>();
+
+                        for (int i = 0 ; i < post.size() ; i++) {
+                            //List<String> list1 = post.get(i);
+                            list = post.get(i);
+                            new DataModel(list.get(1) , list.get(2) , list.get(3) , 1 , 1);
+                            Log.i("jax" , "RecyclerFragment List.Size: " + list.size() +"" );
+                        }
+/*
 
                         List<HashMap<String , Object>> all_cats =
                                 new ArrayList<>();
@@ -74,18 +95,27 @@ public class RecyclerFragment extends Fragment {
 
                         int a = 1;
 
+*/
 
                         myOnClickListener = new MyonClickListener(getActivity());
 
                         sRecyclerView = v.findViewById(R.id.my_recycler); //ok
                         //myOnClickListener = new MyonClickListener(MainActivity.this);
-                        mCustomAdapter = new CustomAdapter(getContext(), cats);
+                        mCustomAdapter = new CustomAdapter(getContext(), post);
                         mLayoutManager= new LinearLayoutManager(getActivity()); //ok
 //                        RecyclerView.LayoutManager mLayoutManager =
 //                                new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                         sRecyclerView.setLayoutManager(mLayoutManager);
                         sRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         sRecyclerView.setAdapter(mCustomAdapter);
+
+                    }
+                }
+        );
+
+
+        t1.start();
+
 
         return v;
     }
