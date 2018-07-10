@@ -44,7 +44,7 @@ public class RecyclerFragment extends Fragment {
     private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=DESC";
     private final String url_powerpoint = "";
 
-    List<List<String>>  post;
+    List<HashMap<String, String>> post;
     ArrayList<DataModel> mDataModels;
 
     @Override
@@ -63,31 +63,31 @@ public class RecyclerFragment extends Fragment {
                         JSONDownloader downloader = new JSONDownloader();
                         String tmp = downloader.downloadURL( url_cat );
 
-                        PostParser catParser = new PostParser();
+                        PostParser postParser = new PostParser();
 
 
-                        post = catParser.parse( tmp );
+                        post = postParser.parse( tmp );
 
                         Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
 
 
 
-                        List<String> list = new ArrayList<>();
+                        HashMap<String , String> Map = new HashMap<>();
                         mDataModels = new ArrayList<>();
 
                         for (int i = 0 ; i < post.size() ; i++) {
                             //List<String> list1 = post.get(i);
-                            list = post.get(i);
-                            mDataModels.add(new DataModel(list.get(0)
-                                                , list.get(1),
-                                                list.get(2),
-                                    list.get(3),
-                                    list.get(4),
-                                    list.get(5),
-                                    list.get(6),
-                                    list.get(7)
+                            Map = post.get(i);
+                            mDataModels.add(new DataModel(Map.get("name")
+                                    , Map.get("header"),
+                                    Map.get("text"),
+                                    Map.get("rate"),
+                                    Map.get("file"),
+                                    Map.get("date"),
+                                    Map.get("user_name"),
+                                    Map.get("cat_name")
                                     ));
-                            Log.i("jax" , "RecyclerFragment List.Size: " + list.size() +"" );
+                            Log.i("jax" , "RecyclerFragment List.Size: " + Map.size() +"" );
                         }
 /*
 
