@@ -49,6 +49,7 @@
                     android:src="@drawable/ic_chevron_right_blue"/>
 
                 <TextView
+                    android:id="@+id/card_cat_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="الکترونیک"
@@ -147,12 +148,14 @@
 
 
                 <ImageView
+                    android:id="@+id/card_image_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:src="@drawable/ic_favorite_border_black_24dp" />
 
                 <TextView
+                    android:id="@+id/card_text_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12K"
@@ -160,12 +163,14 @@
                     android:layout_marginTop="3dp"/>
 
                 <ImageView
+                    android:id="@+id/card_image_seen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:src="@drawable/ic_remove_red_eye_black_24dp" />
 
                 <TextView
+                    android:id="@+id/card_text_seen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12K"

@@ -19,7 +19,7 @@ public class PostParser
         {
             JSONObject jObj = new JSONObject( json );
 
-            JSONArray jArr = jObj.getJSONArray( "ads" );  //ads change to post
+            JSONArray jArr = jObj.getJSONArray( "post" );  //ads change to post
 
             for( int i = 0; i < jArr.length(); i ++ )
             {
@@ -33,7 +33,8 @@ public class PostParser
                 post.add( temp.getString( "rate" ) );
                 post.add( temp.getString( "file" ) );
                 post.add( temp.getString( "date" ) );
-                post.add( temp.getString( "cat_id" ) );
+                post.add( temp.getString( "user_name" ) );
+                post.add( temp.getString( "cat_name" ) );
 
                 all_post.add( post );
             }

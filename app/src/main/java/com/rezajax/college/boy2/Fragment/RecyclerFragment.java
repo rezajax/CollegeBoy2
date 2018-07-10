@@ -41,7 +41,7 @@ public class RecyclerFragment extends Fragment {
 
     private CustomAdapter mCustomAdapter;
 
-    private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=ASC";
+    private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=DESC";
     private final String url_powerpoint = "";
 
     List<List<String>>  post;
@@ -81,8 +81,12 @@ public class RecyclerFragment extends Fragment {
                             mDataModels.add(new DataModel(list.get(0)
                                                 , list.get(1),
                                                 list.get(2),
-                                                1 ,
-                                                1 ));
+                                    list.get(3),
+                                    list.get(4),
+                                    list.get(5),
+                                    list.get(6),
+                                    list.get(7)
+                                    ));
                             Log.i("jax" , "RecyclerFragment List.Size: " + list.size() +"" );
                         }
 /*

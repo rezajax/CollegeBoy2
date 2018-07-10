@@ -17,15 +17,15 @@ public class ScrollingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
-        TextView mMessege = findViewById(R.id.card_text_message);
+        TextView mMessege = findViewById(R.id.card_text_text);
         Bundle bundle = getIntent().getExtras();
 
-        if(bundle.getString("message")!= null)
+        if(bundle.getString("text")!= null)
         {
             //TODO here get the string stored in the string variable and do
             // setText() on userName
 
-            mMessege.setText(bundle.getString("message"));
+            mMessege.setText(bundle.getString("text"));
         }
 
 
