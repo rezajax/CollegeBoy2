@@ -3,24 +3,25 @@ package com.rezajax.college.boy2;
 public class DataModel {
     String name;
     String header;
-    String text;
+    String message;
+
     int id;
     int image;
 
-    public DataModel(String name, String header, String text, int id, int image) {
+    public DataModel(String name, String header, String message, int id, int image) {
         this.name = name;
         this.header = header;
-        this.text = text;
+        this.message = message;
         this.id = id;
         this.image = image;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getName() {

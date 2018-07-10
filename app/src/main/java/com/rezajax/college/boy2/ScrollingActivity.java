@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -15,6 +16,18 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+
+        TextView mMessege = findViewById(R.id.card_text_message);
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle.getString("message")!= null)
+        {
+            //TODO here get the string stored in the string variable and do
+            // setText() on userName
+
+            mMessege.setText(bundle.getString("message"));
+        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

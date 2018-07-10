@@ -44,6 +44,8 @@ public class RecyclerFragment extends Fragment {
     private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=ASC";
     private final String url_powerpoint = "";
 
+    List<List<String>>  post;
+    ArrayList<DataModel> mDataModels;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +65,7 @@ public class RecyclerFragment extends Fragment {
 
                         PostParser catParser = new PostParser();
 
-                        List<List<String>>  post;
+
                         post = catParser.parse( tmp );
 
                         Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
@@ -71,11 +73,16 @@ public class RecyclerFragment extends Fragment {
 
 
                         List<String> list = new ArrayList<>();
+                        mDataModels = new ArrayList<>();
 
                         for (int i = 0 ; i < post.size() ; i++) {
                             //List<String> list1 = post.get(i);
                             list = post.get(i);
-                            new DataModel(list.get(1) , list.get(2) , list.get(3) , 1 , 1);
+                            mDataModels.add(new DataModel(list.get(0)
+                                                , list.get(1),
+                                                list.get(2),
+                                                1 ,
+                                                1 ));
                             Log.i("jax" , "RecyclerFragment List.Size: " + list.size() +"" );
                         }
 /*
@@ -96,18 +103,25 @@ public class RecyclerFragment extends Fragment {
                         int a = 1;
 
 */
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                myOnClickListener = new MyonClickListener(getActivity());
 
-                        myOnClickListener = new MyonClickListener(getActivity());
+                                sRecyclerView = v.findViewById(R.id.my_recycler); //ok
+                                //myOnClickListener = new MyonClickListener(MainActivity.this);
+                                mCustomAdapter = new CustomAdapter(getContext(), mDataModels);
+                                mLayoutManager= new LinearLayoutManager(getActivity()); //ok
+//                              RecyclerView.LayoutManager mLayoutManager =
+//                              new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                                sRecyclerView.setLayoutManager(mLayoutManager);
+                                sRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                                sRecyclerView.setAdapter(mCustomAdapter);
 
-                        sRecyclerView = v.findViewById(R.id.my_recycler); //ok
-                        //myOnClickListener = new MyonClickListener(MainActivity.this);
-                        mCustomAdapter = new CustomAdapter(getContext(), post);
-                        mLayoutManager= new LinearLayoutManager(getActivity()); //ok
-//                        RecyclerView.LayoutManager mLayoutManager =
-//                                new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-                        sRecyclerView.setLayoutManager(mLayoutManager);
-                        sRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                        sRecyclerView.setAdapter(mCustomAdapter);
+                            }
+                        });
+
+
 
                     }
                 }
