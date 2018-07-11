@@ -40,7 +40,9 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_scrolling" />
+    <include
+
+        layout="@layout/content_scrolling" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -49,7 +51,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_cloud_download_black_24dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab2"
@@ -63,7 +65,7 @@
 
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_turned_in_not_black_24dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>

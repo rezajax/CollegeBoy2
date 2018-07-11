@@ -18,6 +18,11 @@ public class ScrollingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scrolling);
 
         TextView mMessege = findViewById(R.id.card_text_text);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
         Bundle bundle = getIntent().getExtras();
 
         if(bundle.getString("text")!= null)
@@ -28,9 +33,13 @@ public class ScrollingActivity extends AppCompatActivity {
             mMessege.setText(bundle.getString("text"));
         }
 
+        if(bundle.getString("text")!= null)
+        {
+            toolbar.setTitle(bundle.getString("name"));
+            setSupportActionBar(toolbar);
+        }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -38,7 +47,7 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "ذخیره شد", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

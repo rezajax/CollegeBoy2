@@ -20,6 +20,7 @@ import com.rezajax.college.boy2.DataModel;
 import com.rezajax.college.boy2.Downloader.CatParser;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
 import com.rezajax.college.boy2.Downloader.PostParser;
+import com.rezajax.college.boy2.Downloader.UserParser;
 import com.rezajax.college.boy2.MainActivity;
 import com.rezajax.college.boy2.R;
 import com.rezajax.college.boy2.ScrollingActivity;
@@ -42,9 +43,11 @@ public class RecyclerFragment extends Fragment {
     private CustomAdapter mCustomAdapter;
 
     private final String url_cat = "http://rezajax.ir/boy2/get_powerpoint_by_cat.php?cat=1&sort=DESC";
+    private final String url_user = "http://rezajax.ir/boy2/user.php?username=rezajax&password=1122";
     private final String url_powerpoint = "";
 
     List<HashMap<String, String>> post;
+    HashMap<String, String> user;
     ArrayList<DataModel> mDataModels;
 
     @Override
@@ -61,33 +64,39 @@ public class RecyclerFragment extends Fragment {
 
 
                         JSONDownloader downloader = new JSONDownloader();
-                        String tmp = downloader.downloadURL( url_cat );
 
+                        String tmpPost = downloader.downloadURL( url_cat );
                         PostParser postParser = new PostParser();
+                        post = postParser.parse( tmpPost );
+                        //Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
+
+                        String tmpUser = downloader.downloadURL( url_cat );
+                        UserParser userParser = new UserParser();
+                        user = userParser.parse( tmpUser );
+
+                        //user.get("image");
 
 
-                        post = postParser.parse( tmp );
-
-                        Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
-
-
-
-                        HashMap<String , String> Map = new HashMap<>();
+                        HashMap<String , String> mapPost = new HashMap<>();
                         mDataModels = new ArrayList<>();
+
 
                         for (int i = 0 ; i < post.size() ; i++) {
                             //List<String> list1 = post.get(i);
-                            Map = post.get(i);
-                            mDataModels.add(new DataModel(Map.get("name")
-                                    , Map.get("header"),
-                                    Map.get("text"),
-                                    Map.get("rate"),
-                                    Map.get("file"),
-                                    Map.get("date"),
-                                    Map.get("user_name"),
-                                    Map.get("cat_name")
+                            mapPost = post.get(i);
+
+                            mDataModels.add(new DataModel(mapPost.get("name")
+                                    , mapPost.get("header"),
+                                    mapPost.get("text"),
+                                    mapPost.get("rate"),
+                                    mapPost.get("file"),
+                                    mapPost.get("date"),
+                                    mapPost.get("user_name"),
+                                    mapPost.get("cat_name"),
+                                    mapPost.get("is_stu")
                                     ));
-                            Log.i("jax" , "RecyclerFragment List.Size: " + Map.size() +"" );
+                            Log.i("jax" , "RecyclerFragment List.Size: " + mapPost.size() +"" );
+                            Log.i("jax" , "RecyclerFragment List.Size: " + mapPost.get("cat_name") +"" );
                         }
 /*
 

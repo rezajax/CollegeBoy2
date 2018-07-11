@@ -79,7 +79,8 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fm = new RecyclerFragment(); //RecyclerFragment fm = new RecyclerFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.frame_fragment, fm).commit();
+//        fragmentManager.beginTransaction().add(R.id.frame_fragment, fm ,"MY_FRAGMENT").commit();
+        fragmentManager.beginTransaction().add(R.id.frame_fragment, fm ).commit();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        fragmentTransaction.add(R.id.frame_fragment, fm).commit();
 
@@ -146,8 +147,26 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Intent intent = new Intent(MainActivity.this , addActivity.class);
+                MainActivity.this.startActivity(intent);
+
+//                Fragment fm = new SettingFragment(); //RecyclerFragment fm = new RecyclerFragment();
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                if (!fm.isVisible()) {
+//                    fragmentManager.beginTransaction().replace(R.id.frame_fragment, fm).commit();
+//                } else {
+//                    fragmentManager.beginTransaction().replace(R.id.frame_fragment, new RecyclerFragment()).commit();
+//                }
+
+//                MyFragment myFragment = (MyFragment)getFragmentManager().findFragmentByTag("MY_FRAGMENT");
+//                if (myFragment != null && myFragment.isVisible()) {
+//                    // add your code here
+//                }
+
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 

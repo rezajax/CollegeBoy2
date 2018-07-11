@@ -2,6 +2,7 @@ package com.rezajax.college.boy2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private ArrayList<DataModel> postset;
     Context mContext;
+    boolean like;
 
 
     public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method
@@ -47,6 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(mContext , ScrollingActivity.class);
                 intent.putExtra("text", postset.get(myViewHolder.getAdapterPosition()).getText());
+                intent.putExtra("name", postset.get(myViewHolder.getAdapterPosition()).getName());
                 mContext.startActivity(intent);
 
                 Toast.makeText(mContext, String.format("LinearLayout_post%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
@@ -57,7 +60,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         myViewHolder.mImageViewLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                if (like) {
+                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    like = false;
+                } else {
+                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                    like = true;
+                }
             }
         });
 
@@ -72,7 +81,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView mTextViewDate = holder.mTextViewDate;
         TextView mTextViewUserName = holder.mTextViewUserName;
         TextView mTextViewCatName = holder.mTextViewCatName;
-
+        LinearLayout mLinearLayout = holder.mProfile;
 
 
 
@@ -87,6 +96,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewDate.setText(postset.get(position).getDate());
         mTextViewUserName.setText(postset.get(position).getUser_name());
         mTextViewCatName.setText(postset.get(position).getCat_name());
+
+
+        if (Integer.parseInt(postset.get(position).getIs_stu()) == 0) {
+            mLinearLayout.setBackgroundColor(Color.parseColor("#DC143C"));
+        }
 
 
     }

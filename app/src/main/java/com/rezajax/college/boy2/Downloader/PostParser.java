@@ -35,6 +35,7 @@ public class PostParser
                 post.put("date", temp.getString( "date" ) );
                 post.put("user_name", temp.getString( "user_name" ) );
                 post.put("cat_name", temp.getString( "cat_name" ) );
+                post.put("is_stu", temp.getString( "is_stu" ) );
 
                 all_post.add( post );
             }
