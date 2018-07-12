@@ -20,6 +20,9 @@
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
 
+            app:layout_scrollFlags="scroll"
+
+
             android:id="@+id/toolbar"
             app:logoDescription="@string/app_name"
 
@@ -63,6 +66,12 @@
             </LinearLayout>
 
 
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.design.widget.CollapsingToolbarLayout>
 
             <!--<ImageView
                 android:layout_width="wrap_content"
@@ -71,22 +80,23 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_launcher_background"/>-->
 
-    </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
 
-<!--    <include
-        layout="@layout/recycler_main2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+    <!--    <include
+            layout="@layout/recycler_main2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />-->
 
 
 
 
     <!--android:paddingTop="?android:attr/actionBarSize"-->
+    <!--android:layout_marginTop="?android:attr/actionBarSize"-->
     <FrameLayout
-        android:layout_marginTop="?android:attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/frame_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -95,6 +105,7 @@
 
 
     <android.support.design.widget.FloatingActionButton
+        app:layout_behavior="com.rezajax.college.boy2.FloatingActionButtonScrollBehavior"
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -50,6 +50,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 Intent intent = new Intent(mContext , ScrollingActivity.class);
                 intent.putExtra("text", postset.get(myViewHolder.getAdapterPosition()).getText());
                 intent.putExtra("name", postset.get(myViewHolder.getAdapterPosition()).getName());
+
+                if (postset.get(myViewHolder.getAdapterPosition()).getName().equals("فیبر نوری")) {
+
+                    intent.putExtra("image", "R.drawable.plc");
+                    Toast.makeText(mContext, String.format("plc" + R.drawable.plc, myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
+                } else {
+                   // intent.putExtra("image", R.drawable.college2);
+                }
                 mContext.startActivity(intent);
 
                 Toast.makeText(mContext, String.format("LinearLayout_post%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
@@ -88,7 +96,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         ImageView imageView = holder.mImageView;
 ////        textViewName.setText(R.string.app_name);
 ////        textViewName.setText(R.string.navigation_drawer_open);
-        imageView.setImageResource(R.drawable.kratos);
+        imageView.setImageResource(R.drawable.electronic);
+
+        if (postset.get(position).getName().equals("فیبر نوری")) {
+
+            imageView.setImageResource(R.drawable.plc);
+        }
 
         mTextViewName.setText(postset.get(position).getName());
         mTextViewHeader.setText(postset.get(position).getHeader());

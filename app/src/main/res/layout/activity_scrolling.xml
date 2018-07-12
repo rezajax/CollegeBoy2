@@ -25,9 +25,10 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
+                android:id="@+id/image_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/kratos"
+                android:src="@drawable/electronic"
                 android:scaleType="centerCrop"/>
 
             <android.support.v7.widget.Toolbar

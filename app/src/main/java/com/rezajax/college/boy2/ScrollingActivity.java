@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ScrollingActivity extends AppCompatActivity {
@@ -33,11 +34,19 @@ public class ScrollingActivity extends AppCompatActivity {
             mMessege.setText(bundle.getString("text"));
         }
 
-        if(bundle.getString("text")!= null)
+        if(bundle.getString("name")!= null)
         {
             toolbar.setTitle(bundle.getString("name"));
             setSupportActionBar(toolbar);
         }
+
+        if(bundle.getString("image")!= null)
+        {
+
+            ImageView imageView = findViewById(R.id.image_header);
+            imageView.setImageResource(R.drawable.plc);
+        }
+
 
 
 
