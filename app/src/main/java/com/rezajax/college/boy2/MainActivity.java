@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -170,11 +172,48 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        /*ImageView nv = findViewById(R.id.toolbar_subtitle);
+        nv.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+
+              }
+          });*/
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setLogo(R.drawable.profile);
+//        actionBar.setDisplayUseLogoEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                drawer,         /* DrawerLayout object */
+                toolbar,  /* nav drawer icon to replace 'Up' caret */
+                R.string.navigation_drawer_open,  /* "open drawer" description */
+                R.string.navigation_drawer_close  /* "close drawer" description */
+        );
+        /*{
+
+            *//** Called when a drawer has settled in a completely closed state. *//*
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle("close");
+            }
+
+            *//** Called when a drawer has settled in a completely open state. *//*
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle("open");
+            }
+        };*/
+
+        // Set the drawer toggle as the DrawerListener
+        drawer.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view); //initializes list of items in navigationdrawer
         navigationView.setNavigationItemSelectedListener(this);

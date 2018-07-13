@@ -44,12 +44,16 @@
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_blank"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".addActivity"
             android:label="@string/title_activity_add"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme">
+
+        </activity>
     </application>
 
 </manifest>
