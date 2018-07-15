@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/card_post"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,11 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
+        card_view:cardElevation="0dp"
 
 
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
 
         >
 
@@ -27,7 +29,7 @@
 
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:background="@color/withe2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -37,50 +39,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
 
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="13dp"
-                    android:src="@drawable/ic_chevron_right_blue"/>
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_chevron_right_blue" />
 
                 <TextView
                     android:id="@+id/card_cat_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+
                     android:text="الکترونیک"
-                    android:textStyle="bold"
-
-                    android:layout_marginTop="15dp"
-
-                    android:textSize="15sp" />
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
 
-                    android:layout_marginTop="15dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
 
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/card_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="6dp"
 
-                    android:text="00:00"/>
-
+                    android:text="00:00" />
 
 
             </LinearLayout>
@@ -99,9 +96,9 @@
                     android:layout_width="0dp"
                     android:layout_height="123dp"
 
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
 
                     android:src="@drawable/kratos"
                     android:scaleType="centerCrop"
@@ -120,64 +117,67 @@
                             android:id="@+id/card_text_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
                             android:text="فایل شماره یک"
-                            android:textAppearance="?android:textAppearanceLarge"/>
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textSize="19sp"/>
 
                         <TextView
                             android:id="@+id/card_text_header"
                             android:layout_width="match_parent"
-                            android:layout_height="90dp"
+                            android:layout_height="75dp"
                             android:layout_marginTop="3dp"
                             android:maxLines="4"
                             android:maxLength="140"
                             android:text=" این یک متن تصادفی است.این یک متن تصافی است.این یک متنی تصادفی است. این یک متن تصادفی است. این یک متن تصادفی است. این یک متن تصادفی است.این یک متن تصافی است."
 
-                            android:textAppearance="?android:textAppearanceMedium"/>
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textSize="12sp"/>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:layoutDirection="ltr">
+
+
+                            <ImageView
+                                android:id="@+id/card_image_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:src="@drawable/ic_favorite_border_black_24dp" />
+
+                            <TextView
+                                android:id="@+id/card_text_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12K"
+                                android:textAppearance="?android:textAppearanceSmall"
+                                android:layout_marginTop="2dp"/>
+
+                            <ImageView
+                                android:id="@+id/card_image_seen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:src="@drawable/ic_remove_red_eye_black_24dp" />
+
+                            <TextView
+                                android:id="@+id/card_text_seen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12K"
+                                android:textAppearance="?android:textAppearanceSmall"
+                                android:layout_marginTop="2dp"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layoutDirection="ltr">
 
-
-                <ImageView
-                    android:id="@+id/card_image_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/ic_favorite_border_black_24dp" />
-
-                <TextView
-                    android:id="@+id/card_text_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12K"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_marginTop="3dp"/>
-
-                <ImageView
-                    android:id="@+id/card_image_seen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/ic_remove_red_eye_black_24dp" />
-
-                <TextView
-                    android:id="@+id/card_text_seen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12K"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:layout_marginTop="2dp"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 

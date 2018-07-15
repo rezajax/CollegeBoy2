@@ -30,10 +30,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rezajax.college.boy2.Downloader.CatParser;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView btn = findViewById(R.id.btn_font);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/irsans.ttf");
+        btn.setTypeface(typeface);
 
         Fragment fm = new RecyclerFragment(); //RecyclerFragment fm = new RecyclerFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -271,7 +276,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            return true;
+            Toast.makeText(this, "search" , Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);

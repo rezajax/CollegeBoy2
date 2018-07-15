@@ -3,6 +3,10 @@ package com.rezajax.college.boy2;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +24,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private ArrayList<DataModel> postset;
     Context mContext;
     boolean like;
-
+    public Vibrator vib;
 
     public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method
         this.mContext = mContext;
@@ -34,6 +38,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 .inflate(R.layout.card_layout, parent, false);
 
         //view.setOnClickListener(MainActivity.myOnClickListener);
+
+        vib = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+
 
         final MyViewHolder myViewHolder = new MyViewHolder(view);
 
@@ -71,9 +78,53 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 if (like) {
                     myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     like = false;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                    }else{
+                        //deprecated in API 26
+                        vib.vibrate(15);
+                    }
+
                 } else {
                     myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
                     like = true;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                    }else{
+                        //deprecated in API 26
+                        vib.vibrate(15);
+                    }
+                }
+            }
+        });
+
+
+        myViewHolder.mTextViewLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    like = false;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                    }else{
+                        //deprecated in API 26
+                        vib.vibrate(15);
+                    }
+
+                } else {
+                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                    like = true;
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                    }else{
+                        //deprecated in API 26
+                        vib.vibrate(15);
+                    }
                 }
             }
         });
@@ -90,6 +141,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView mTextViewUserName = holder.mTextViewUserName;
         TextView mTextViewCatName = holder.mTextViewCatName;
         LinearLayout mLinearLayout = holder.mProfile;
+        //TextView mTextViewLike = holder.mTextViewLike;        text number of like
 
 
 
@@ -144,21 +196,38 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         ImageView mImageView;
 
+
         public MyViewHolder(View itemView) {
             super(itemView);
+            Typeface typeface = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/Shabnam.ttf");
+
             this.mTextViewName = itemView.findViewById(R.id.card_text_name);
+            this.mTextViewName.setTypeface(typeface);
+
             this.mTextViewHeader = itemView.findViewById(R.id.card_text_header);
+            this.mTextViewHeader.setTypeface(typeface);
+
             this.mTextViewText = itemView.findViewById(R.id.card_text_text);
+
             this.mTextViewSeen = itemView.findViewById(R.id.card_text_seen);
+            this.mTextViewSeen.setTypeface(typeface);
+
             this.mTextViewDate = itemView.findViewById(R.id.card_date);
+            this.mTextViewDate.setTypeface(typeface);
+
             this.mTextViewUserName = itemView.findViewById(R.id.card_user_name);
+            this.mTextViewUserName.setTypeface(typeface);
+
             this.mTextViewCatName = itemView.findViewById(R.id.card_cat_name);
+            this.mTextViewCatName.setTypeface(typeface);
 
 
             this.mTextViewLike = itemView.findViewById(R.id.card_text_like);
+            this.mTextViewLike.setTypeface(typeface);
+
             this.mImageViewLike = itemView.findViewById(R.id.card_image_like);
 
-            this.mProfile = itemView.findViewById(R.id.card_profile);
+            this.mProfile = itemView.findViewById(R.id.card_profile_linear);
             this.mPost = itemView.findViewById(R.id.card_post);
 
             this.mImageView = itemView.findViewById(R.id.card_image);

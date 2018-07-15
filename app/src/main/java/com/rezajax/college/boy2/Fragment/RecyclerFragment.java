@@ -56,6 +56,8 @@ public class RecyclerFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recycler, container, false);
 
+//        if internet (is connect) start t1 else connect offline database and start t2
+
         Thread t1 = new Thread(
                 new Runnable() {
                     @Override
