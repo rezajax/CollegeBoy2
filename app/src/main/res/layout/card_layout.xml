@@ -45,14 +45,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="4dp"
                     android:src="@drawable/ic_chevron_right_blue" />
 
                 <TextView
                     android:id="@+id/card_cat_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="4dp"
 
                     android:text="الکترونیک"
                     android:textSize="12sp"
@@ -137,30 +137,46 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layoutDirection="ltr"
                             android:layout_marginBottom="6dp"
-                            android:layoutDirection="ltr">
+                            android:background="@color/withe2"
+                            >
 
+                            <LinearLayout
+                                android:id="@+id/linear_like"
+                                android:orientation="horizontal"
+                                android:layout_width="50dp"
+                                android:layout_height="23dp"
+                                >
 
                             <ImageView
                                 android:id="@+id/card_image_like"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
                                 android:layout_marginStart="6dp"
+
                                 android:src="@drawable/ic_favorite_border_black_24dp" />
 
                             <TextView
                                 android:id="@+id/card_text_like"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="12K"
+                                android:text="0"
                                 android:textAppearance="?android:textAppearanceSmall"
+                                android:textSize="12sp"
                                 android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp">
 
                             <ImageView
                                 android:id="@+id/card_image_seen"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
                                 android:src="@drawable/ic_remove_red_eye_black_24dp" />
 
                             <TextView
@@ -169,7 +185,9 @@
                                 android:layout_height="wrap_content"
                                 android:text="12K"
                                 android:textAppearance="?android:textAppearanceSmall"
+                                android:textSize="12sp"
                                 android:layout_marginTop="2dp"/>
+                            </LinearLayout>
 
                         </LinearLayout>
 

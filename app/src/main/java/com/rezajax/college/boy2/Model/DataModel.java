@@ -1,4 +1,4 @@
-package com.rezajax.college.boy2;
+package com.rezajax.college.boy2.Model;
 
 import android.text.format.DateFormat;
 import android.util.Log;

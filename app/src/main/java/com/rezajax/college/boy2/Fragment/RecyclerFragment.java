@@ -2,7 +2,7 @@ package com.rezajax.college.boy2.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,12 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rezajax.college.boy2.CustomAdapter;
-import com.rezajax.college.boy2.DataModel;
-import com.rezajax.college.boy2.Downloader.CatParser;
+import com.rezajax.college.boy2.Model.DataModel;
+import com.rezajax.college.boy2.Database.UserBaseHelper;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
 import com.rezajax.college.boy2.Downloader.PostParser;
 import com.rezajax.college.boy2.Downloader.UserParser;
-import com.rezajax.college.boy2.MainActivity;
 import com.rezajax.college.boy2.R;
 import com.rezajax.college.boy2.ScrollingActivity;
 
@@ -50,11 +49,21 @@ public class RecyclerFragment extends Fragment {
     HashMap<String, String> user;
     ArrayList<DataModel> mDataModels;
 
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recycler, container, false);
+
+
+        mContext = getContext().getApplicationContext();
+        mDatabase = new UserBaseHelper(mContext).getWritableDatabase();
+
+
+
 
 //        if internet (is connect) start t1 else connect offline database and start t2
 
@@ -118,6 +127,10 @@ public class RecyclerFragment extends Fragment {
                         int a = 1;
 
 */
+
+
+//        if internet (is connect) start t1 else connect offline database and start t2
+
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -148,6 +161,10 @@ public class RecyclerFragment extends Fragment {
 
         return v;
     }
+
+
+
+
 
 
     @Override

@@ -1,5 +1,6 @@
 package com.rezajax.college.boy2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -37,13 +39,17 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rezajax.college.boy2.Database.UserDbSchema;
 import com.rezajax.college.boy2.Downloader.CatParser;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
+import com.rezajax.college.boy2.Downloader.UserParser;
 import com.rezajax.college.boy2.Fragment.AccountFragment;
 import com.rezajax.college.boy2.Fragment.HomeFragment;
 import com.rezajax.college.boy2.Fragment.RecyclerFragment;
 import com.rezajax.college.boy2.Fragment.SettingFragment;
 import com.rezajax.college.boy2.Justifie.JustifiedTextView;
+import com.rezajax.college.boy2.Model.DataModel;
+import com.rezajax.college.boy2.Model.UserModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
     private CustomAdapter mCustomAdapter;
 
-    private final String url_cat = "http://rezajax.ir/boy2/get_cat.php";
+    private final String url_user_creat = "http://rezajax.ir/boy2/get_cat.php";
     private final String url_powerpoint = "";
 
     ViewPager viewPager;
@@ -75,6 +81,9 @@ public class MainActivity extends AppCompatActivity
     private JustifiedTextView mJTv;
 
 
+    public UserModel userModel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +93,68 @@ public class MainActivity extends AppCompatActivity
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/irsans.ttf");
         btn.setTypeface(typeface);
 
+
+        Thread t1 = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                        JSONDownloader downloader = new JSONDownloader();
+                        String username = "rezajax";
+                        String pass = "1122";
+                        String tmp = downloader.downloadURL( getResources().getString(R.string.url_user, username, pass ));
+
+                        UserParser userParser = new UserParser();
+
+                        HashMap<String , String> user;
+                        user = userParser.parse( tmp );
+                        Log.i("user" , "RecyclerFragment Post.user: " + user.get("name") +"" );
+
+                        userModel = new UserModel("1"
+                                , user.get("appid"),
+                                user.get("stuid"),
+                                user.get("pass"),
+                                user.get("name"),
+                                user.get("family"),
+                                user.get("image"),
+                                user.get("cource"),
+                                user.get("email"),
+                                user.get("phone"),
+                                user.get("date"),
+                                user.get("num_post")
+                        );
+
+                    }
+                }
+        );
+
+        t1.start();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Fragment fm = new RecyclerFragment(); //RecyclerFragment fm = new RecyclerFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().add(R.id.frame_fragment, fm ,"MY_FRAGMENT").commit();
         fragmentManager.beginTransaction().add(R.id.frame_fragment, fm ).commit();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        fragmentTransaction.add(R.id.frame_fragment, fm).commit();
+
+
 
 
         /*Thread t1 = new Thread(
@@ -235,6 +300,25 @@ public class MainActivity extends AppCompatActivity
 
         //make_category_list();
         //setupTabIcons();
+
+
+    }
+
+    private static ContentValues getContentValus (UserModel userModel) {
+        ContentValues values = new ContentValues();
+        values.put(UserDbSchema.UserTable.Cols.ID , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.APPID , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.STUID , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.PASS , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.NAME , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.FAMILY , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.COURCE , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.EMAIL , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.PHONE , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.DATE , userModel.getId());
+        //values.put(UserDbSchema.UserTable.Cols.IS_STU , userModel.get());
+
+        return values;
     }
 
     private void applyFontToMenuItem(MenuItem mi) {
@@ -352,7 +436,7 @@ public class MainActivity extends AppCompatActivity
                 public void run() {
 
                     JSONDownloader downloader = new JSONDownloader();
-                    String tmp = downloader.downloadURL( url_cat );
+                    String tmp = downloader.downloadURL( url_user_creat );
 
                     CatParser catParser = new CatParser();
 

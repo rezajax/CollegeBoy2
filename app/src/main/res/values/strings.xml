@@ -121,4 +121,10 @@
         completions."
     </string>
 
+    <!--** You shot %1$d pounds of meat!-->
+    <string name="url_user_create">http://rezajax.ir/boy2/set_user.php?appid=%1$d&amp;stuid=%1$d&amp;pass=%2$d&amp;
+        name=%1$damp;family=%1$d&amp;image=%1$d&amp;course=%1$d&amp;email=%1$d&amp;phone=%1$d&amp;cat_id=%1$d</string>
+    <string name="url_user">http://rezajax.ir/boy2/user.php?username=%1$s&amp;password=%2$s</string>
+
+
 </resources>

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -16,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.rezajax.college.boy2.Model.DataModel;
 
 import java.util.ArrayList;
 
@@ -40,6 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         //view.setOnClickListener(MainActivity.myOnClickListener);
 
         vib = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        like = true;
 
 
         final MyViewHolder myViewHolder = new MyViewHolder(view);
@@ -71,65 +76,57 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             }
         });
 
-        myViewHolder.mImageViewLike.setClickable(true);
-        myViewHolder.mImageViewLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (like) {
-                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    like = false;
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
-                    }else{
-                        //deprecated in API 26
-                        vib.vibrate(15);
-                    }
+        myViewHolder.like.setClickable(true);
+        myViewHolder.like.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
 
-                } else {
-                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
-                    like = true;
+                 if (like) {
+                     myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
-                    }else{
-                        //deprecated in API 26
-                        vib.vibrate(15);
-                    }
-                }
-            }
+
+                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                         vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                     }else{
+                         //deprecated in API 26
+                         vib.vibrate(15);
+                     }
+                     int likenum = Integer.parseInt(myViewHolder.mTextViewLike.getText().toString()) + 1;
+                     myViewHolder.mTextViewLike.setText(likenum + "");
+
+                     like = false;
+                 } else {
+                     myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                         vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
+                     }else{
+                         //deprecated in API 26
+                         vib.vibrate(15);
+                     }
+
+                     int likenum = Integer.parseInt(myViewHolder.mTextViewLike.getText().toString()) - 1;
+                     myViewHolder.mTextViewLike.setText(likenum + "");
+
+                     like = true;
+                 }
+             }
         });
 
-
-        myViewHolder.mTextViewLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (like) {
-                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    like = false;
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
-                    }else{
-                        //deprecated in API 26
-                        vib.vibrate(15);
-                    }
-
-                } else {
-                    myViewHolder.mImageViewLike.setImageResource(R.drawable.ic_favorite_red);
-                    like = true;
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vib.vibrate(VibrationEffect.createOneShot(15,VibrationEffect.DEFAULT_AMPLITUDE));
-                    }else{
-                        //deprecated in API 26
-                        vib.vibrate(15);
-                    }
-                }
-            }
-        });
 
         return myViewHolder;
+    }
+
+    private boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+
+        return hasImage;
     }
 
     @Override
@@ -196,6 +193,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         ImageView mImageView;
 
+        LinearLayout like;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -226,6 +225,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.mTextViewLike.setTypeface(typeface);
 
             this.mImageViewLike = itemView.findViewById(R.id.card_image_like);
+
+            this.like = itemView.findViewById(R.id.linear_like);
 
             this.mProfile = itemView.findViewById(R.id.card_profile_linear);
             this.mPost = itemView.findViewById(R.id.card_post);
