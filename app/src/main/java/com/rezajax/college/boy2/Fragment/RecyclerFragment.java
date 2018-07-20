@@ -3,6 +3,7 @@ package com.rezajax.college.boy2.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -57,6 +58,12 @@ public class RecyclerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_recycler, container, false);
+        v.setTag("RecyclerViewFragment");
+
+        //Rest of the things
+        sRecyclerView = v.findViewById(R.id.my_recycler); //ok
+
+
 
 
         mContext = getContext().getApplicationContext();
@@ -66,6 +73,8 @@ public class RecyclerFragment extends Fragment {
 
 
 //        if internet (is connect) start t1 else connect offline database and start t2
+
+
 
         Thread t1 = new Thread(
                 new Runnable() {
@@ -79,13 +88,13 @@ public class RecyclerFragment extends Fragment {
                         String tmpPost = downloader.downloadURL( url_cat );
                         PostParser postParser = new PostParser();
                         post = postParser.parse( tmpPost );
-                        //Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
+                        Log.i("jax" , "RecyclerFragment Post.Size: " + post.size() +"" );
 
                         String tmpUser = downloader.downloadURL( url_cat );
                         UserParser userParser = new UserParser();
                         user = userParser.parse( tmpUser );
 
-                        //user.get("image");
+                        user.get("image");
 
 
                         HashMap<String , String> mapPost = new HashMap<>();
@@ -96,11 +105,12 @@ public class RecyclerFragment extends Fragment {
                             //List<String> list1 = post.get(i);
                             mapPost = post.get(i);
 
-                            mDataModels.add(new DataModel(mapPost.get("name")
-                                    , mapPost.get("header"),
+                            mDataModels.add(new DataModel(mapPost.get("name"),
+                                    mapPost.get("header"),
                                     mapPost.get("text"),
                                     mapPost.get("rate"),
                                     mapPost.get("file"),
+                                    mapPost.get("image"), //R.drawable.plc + "",
                                     mapPost.get("date"),
                                     mapPost.get("user_name"),
                                     mapPost.get("cat_name"),
@@ -109,6 +119,29 @@ public class RecyclerFragment extends Fragment {
                             Log.i("jax" , "RecyclerFragment List.Size: " + mapPost.size() +"" );
                             Log.i("jax" , "RecyclerFragment List.Size: " + mapPost.get("cat_name") +"" );
                         }
+
+                        for (int i = 0; i < mDataModels.size() ; i++) {
+                            String img = "http://rezajax.ir/boy2/img/" + mDataModels.get(i).getImage();
+
+
+
+                        }
+
+/*
+                        mDataModels.add(new DataModel("سلام",
+                                "سلام",
+                                "سلام",
+                                "3",
+                                "a",
+                                "a",
+                                "2018-07-12 17:26:56",
+                                "دکتر محمدی",
+                                "الکترونیک",
+                                "1"
+                        ));
+*/
+
+
 /*
 
                         List<HashMap<String , Object>> all_cats =
@@ -156,14 +189,21 @@ public class RecyclerFragment extends Fragment {
         );
 
 
-        t1.start();
 
+        if (isNetworkConnected()) {
+            t1.start();
+        }
 
         return v;
     }
 
 
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
 
 
 

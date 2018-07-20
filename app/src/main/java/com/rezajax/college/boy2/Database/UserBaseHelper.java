@@ -23,11 +23,12 @@ public class UserBaseHelper extends SQLiteOpenHelper {
                 UserTable.Cols.PASS + ", " +
                 UserTable.Cols.NAME + ", " +
                 UserTable.Cols.FAMILY + ", " +
-                UserTable.Cols.COURCE + ", " +
+                //UserTable.Cols.COURCE + ", " +
                 UserTable.Cols.EMAIL + ", " +
                 UserTable.Cols.PHONE + ", " +
                 UserTable.Cols.DATE + ", " +
-                //UserTable.Cols.num_post + ", " +
+                UserTable.Cols.CAT_NAME + ", " +
+                UserTable.Cols.NUM_POST + ", " +
                 UserTable.Cols.IS_STU +
                 ")"
         );

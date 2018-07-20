@@ -11,6 +11,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_layout, parent, false);
-
         //view.setOnClickListener(MainActivity.myOnClickListener);
+
+
+
 
         vib = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         like = true;
@@ -59,6 +62,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         myViewHolder.mPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //removeItem(myViewHolder.getAdapterPosition());
                 Intent intent = new Intent(mContext , ScrollingActivity.class);
                 intent.putExtra("text", postset.get(myViewHolder.getAdapterPosition()).getText());
                 intent.putExtra("name", postset.get(myViewHolder.getAdapterPosition()).getName());
@@ -115,7 +120,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         });
 
 
-        return myViewHolder;
+        return myViewHolder; //return new MyViewHolder(view);
     }
 
     private boolean hasImage(@NonNull ImageView view) {
@@ -129,6 +134,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return hasImage;
     }
 
+    public void updateData(ArrayList<DataModel> dataModel) {
+        postset.clear();
+        postset.addAll(dataModel);
+        notifyDataSetChanged();
+    }
+    public void addItem(int position, DataModel dataModel) {
+        postset.add(position, dataModel);
+        notifyItemInserted(position);
+    }
+
+    public void removeItem(int position) {
+        postset.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
         TextView mTextViewName = holder.mTextViewName;
@@ -138,6 +159,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView mTextViewUserName = holder.mTextViewUserName;
         TextView mTextViewCatName = holder.mTextViewCatName;
         LinearLayout mLinearLayout = holder.mProfile;
+        ImageView mimageViewPost = holder.mImageView;
         //TextView mTextViewLike = holder.mTextViewLike;        text number of like
 
 
@@ -159,7 +181,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewUserName.setText(postset.get(position).getUser_name());
         mTextViewCatName.setText(postset.get(position).getCat_name());
 
+        /*if (postset.get(position).getImage() != null) {
+            mimageViewPost.setImageResource(Integer.parseInt( postset.get(position).getImage()));
+        } else {
+            mimageViewPost.setImageResource(R.drawable.profile);
+        }*/
 
+        Log.i("is",postset.get(position).getIs_stu() );
         if (Integer.parseInt(postset.get(position).getIs_stu()) == 0) {
             mLinearLayout.setBackgroundColor(Color.parseColor("#DC143C"));
         }

@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+//        Intent intent = new Intent(getApplicationContext() , SplashActivity.class);
+//        startActivity(intent);
 
 
 
@@ -307,15 +308,15 @@ public class MainActivity extends AppCompatActivity
     private static ContentValues getContentValus (UserModel userModel) {
         ContentValues values = new ContentValues();
         values.put(UserDbSchema.UserTable.Cols.ID , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.APPID , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.STUID , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.PASS , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.NAME , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.FAMILY , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.COURCE , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.EMAIL , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.PHONE , userModel.getId());
-        values.put(UserDbSchema.UserTable.Cols.DATE , userModel.getId());
+        values.put(UserDbSchema.UserTable.Cols.APPID , userModel.getAppid());
+        values.put(UserDbSchema.UserTable.Cols.STUID , userModel.getStuid());
+        values.put(UserDbSchema.UserTable.Cols.PASS , userModel.getPass());
+        values.put(UserDbSchema.UserTable.Cols.NAME , userModel.getName());
+        values.put(UserDbSchema.UserTable.Cols.FAMILY , userModel.getFamily());
+        //values.put(UserDbSchema.UserTable.Cols.COURCE , userModel.getCource());
+        values.put(UserDbSchema.UserTable.Cols.EMAIL , userModel.getEmail());
+        values.put(UserDbSchema.UserTable.Cols.PHONE , userModel.getPhone());
+        values.put(UserDbSchema.UserTable.Cols.DATE , userModel.getDate());
         //values.put(UserDbSchema.UserTable.Cols.IS_STU , userModel.get());
 
         return values;

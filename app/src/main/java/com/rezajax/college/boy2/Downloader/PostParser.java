@@ -32,17 +32,19 @@ public class PostParser
                 post.put("text", temp.getString( "text" ) );
                 post.put("rate", temp.getString( "rate" ) );
                 post.put("file", temp.getString( "file" ) );
+                post.put("image", temp.getString( "image" ) );
                 post.put("date", temp.getString( "date" ) );
                 post.put("user_name", temp.getString( "user_name" ) );
                 post.put("cat_name", temp.getString( "cat_name" ) );
                 post.put("is_stu", temp.getString( "is_stu" ) );
 
                 all_post.add( post );
+                Log.i("jax" , "RecyclerFragment Post.Size: " + temp.getString( "is_stu" +"") );
             }
         }
         catch ( Exception e )
         {
-            Log.i("jax", "error in CatParser in parser() -> " + e.toString() );
+            Log.i("jax", "error in PostParser in parser() -> " + e.toString() );
         }
 
         return ( all_post );

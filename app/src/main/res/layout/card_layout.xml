@@ -64,7 +64,7 @@
 
 
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="5dp"
 
                     android:layout_weight="1" />
 
@@ -124,7 +124,7 @@
                         <TextView
                             android:id="@+id/card_text_header"
                             android:layout_width="match_parent"
-                            android:layout_height="75dp"
+                            android:layout_height="73dp"
                             android:layout_marginTop="3dp"
                             android:maxLines="4"
                             android:maxLength="140"
@@ -133,19 +133,21 @@
                             android:textAppearance="?android:textAppearanceMedium"
                             android:textSize="12sp"/>
 
+                        <!--android:background="@color/withe2"-->
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layoutDirection="ltr"
-                            android:layout_marginBottom="6dp"
-                            android:background="@color/withe2"
+
+                            android:paddingTop="2dp"
+                            android:paddingBottom="6dp"
                             >
 
                             <LinearLayout
                                 android:id="@+id/linear_like"
                                 android:orientation="horizontal"
-                                android:layout_width="50dp"
+                                android:layout_width="40dp"
                                 android:layout_height="23dp"
                                 >
 
@@ -187,6 +189,27 @@
                                 android:textAppearance="?android:textAppearanceSmall"
                                 android:textSize="12sp"
                                 android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp">
+
+                                <ImageView
+                                    android:layout_width="23dp"
+                                    android:layout_height="23dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_comment_black_24dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="12K"
+                                    android:textAppearance="?android:textAppearanceSmall"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="2dp"/>
                             </LinearLayout>
 
                         </LinearLayout>

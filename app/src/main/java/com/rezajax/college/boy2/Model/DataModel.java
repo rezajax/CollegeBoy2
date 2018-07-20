@@ -13,22 +13,32 @@ public class DataModel {
     String text;
     String rate;
     String file;
+    String image;
     String date;
     String user_name;
     String cat_name;
     String is_stu;
 
-    public DataModel(String name, String header, String text, String rate, String file, String date, String user_name, String cat_name, String is_stu) {
+    public DataModel(String name, String header, String text, String rate, String file, String image, String date, String user_name, String cat_name, String is_stu) {
         this.name = name;
         this.header = header;
         this.text = text;
         this.rate = rate;
         this.file = file;
+        this.image = image;
         this.date = date;   //   this.date = date;       this.date = date.substring(0 , 4);
         this.user_name = user_name;
         this.cat_name = cat_name;
         this.is_stu = is_stu;
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getIs_stu() {

@@ -8,15 +8,16 @@ public class UserDbSchema {
             public static final String ID = "id";
             public static final String APPID = "appid";
             public static final String STUID = "stuid";
-            public static final String PASS = "id";
-            public static final String NAME = "id";
-            public static final String FAMILY = "id";
-            public static final String COURCE = "id";
-            public static final String EMAIL = "id";
-            public static final String PHONE = "id";
+            public static final String PASS = "pass";
+            public static final String NAME = "name";
+            public static final String FAMILY = "family";
+            //public static final String COURCE = "id";
+            public static final String EMAIL = "email";
+            public static final String PHONE = "phone";
             public static final String DATE = "date";
-            public static final String NUM_POST = "date";
-            public static final String IS_STU = "id";
+            public static final String CAT_NAME = "cat_name";
+            public static final String NUM_POST = "num_post";
+            public static final String IS_STU = "is_stu";
         }
     }
 

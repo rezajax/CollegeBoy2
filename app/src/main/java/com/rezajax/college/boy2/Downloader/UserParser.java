@@ -40,7 +40,7 @@ public class UserParser
         }
         catch ( Exception e )
         {
-            Log.i("jax", "error in CatParser in parser() -> " + e.toString() );
+            Log.i("jax", "error in UerParser in parser() -> " + e.toString() );
         }
 
         return ( all_cats );
