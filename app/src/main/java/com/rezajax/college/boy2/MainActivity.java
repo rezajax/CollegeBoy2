@@ -93,6 +93,10 @@ public class MainActivity extends AppCompatActivity
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/irsans.ttf");
         btn.setTypeface(typeface);
 
+        Log.i("context", "getApplicationContext: " + getApplicationContext()
+                + " this: " + this
+                + " getBaseContext: " + getBaseContext());
+
 
         Thread t1 = new Thread(
                 new Runnable() {

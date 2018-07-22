@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rezajax.college.boy2.CustomAdapter;
+import com.rezajax.college.boy2.Downloader.ImageDownloaderTask;
 import com.rezajax.college.boy2.Model.DataModel;
 import com.rezajax.college.boy2.Database.UserBaseHelper;
 import com.rezajax.college.boy2.Downloader.JSONDownloader;
@@ -110,7 +111,7 @@ public class RecyclerFragment extends Fragment {
                                     mapPost.get("text"),
                                     mapPost.get("rate"),
                                     mapPost.get("file"),
-                                    mapPost.get("image"), //R.drawable.plc + "",
+                                    R.drawable.plc + "", //mapPost.get("image"), //R.drawable.plc + "",
                                     mapPost.get("date"),
                                     mapPost.get("user_name"),
                                     mapPost.get("cat_name"),
@@ -123,8 +124,11 @@ public class RecyclerFragment extends Fragment {
                         for (int i = 0; i < mDataModels.size() ; i++) {
                             String img = "http://rezajax.ir/boy2/img/" + mDataModels.get(i).getImage();
 
-
-
+                            HashMap<String, Object> forDowwnload = new HashMap<>();
+                            forDowwnload.put("image_path", img);
+                            forDowwnload.put("position", i);
+                            ImageDownloaderTask imgDonloader = new ImageDownloaderTask(getActivity().getBaseContext() , mDataModels ); //context();
+                            imgDonloader.execute( forDowwnload );
                         }
 
 /*

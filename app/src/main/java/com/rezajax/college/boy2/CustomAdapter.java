@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.rezajax.college.boy2.Model.DataModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
@@ -31,7 +32,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     boolean like;
     public Vibrator vib;
 
-    public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method
+    public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method متد ایجاد کننده ,constructor method متد سازنده
         this.mContext = mContext;
         this.postset = postset;
     }
@@ -134,11 +135,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return hasImage;
     }
 
-    public void updateData(ArrayList<DataModel> dataModel) {
+    /*public void updateData(ArrayList<DataModel> dataModel) {
         postset.clear();
         postset.addAll(dataModel);
         notifyDataSetChanged();
+    }*/
+    public void updateData(HashMap<String, Object>... updateModel) {
+//        String imgUrl = (String) updateModel[0].get( "image" );
+//        int position = (Integer) updateModel[0].get( "position" );
+
+        //postset.get(position).setImage(imgUrl);
+        //notifyDataSetChanged();
+
+        //postset.clear();
+        //postset.addAll(dataModel);
+        //notifyDataSetChanged();
     }
+
     public void addItem(int position, DataModel dataModel) {
         postset.add(position, dataModel);
         notifyItemInserted(position);
@@ -159,7 +172,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView mTextViewUserName = holder.mTextViewUserName;
         TextView mTextViewCatName = holder.mTextViewCatName;
         LinearLayout mLinearLayout = holder.mProfile;
-        ImageView mimageViewPost = holder.mImageView;
+        ImageView mImageViewPost = holder.mImageView;
         //TextView mTextViewLike = holder.mTextViewLike;        text number of like
 
 
@@ -180,6 +193,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewDate.setText(postset.get(position).getDate());
         mTextViewUserName.setText(postset.get(position).getUser_name());
         mTextViewCatName.setText(postset.get(position).getCat_name());
+
+//        mImageViewPost.setImageResource(Integer.parseInt(postset.get(position).getImage()));
 
         /*if (postset.get(position).getImage() != null) {
             mimageViewPost.setImageResource(Integer.parseInt( postset.get(position).getImage()));
