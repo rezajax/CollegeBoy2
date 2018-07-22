@@ -26,6 +26,7 @@ import com.rezajax.college.boy2.Downloader.UserParser;
 import com.rezajax.college.boy2.R;
 import com.rezajax.college.boy2.ScrollingActivity;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +112,7 @@ public class RecyclerFragment extends Fragment {
                                     mapPost.get("text"),
                                     mapPost.get("rate"),
                                     mapPost.get("file"),
-                                    R.drawable.plc + "", //mapPost.get("image"), //R.drawable.plc + "",
+                                    mapPost.get("image"), //mapPost.get("image"), //R.drawable.plc + "",
                                     mapPost.get("date"),
                                     mapPost.get("user_name"),
                                     mapPost.get("cat_name"),
@@ -121,6 +122,7 @@ public class RecyclerFragment extends Fragment {
                             Log.i("jax" , "RecyclerFragment List.Size: " + mapPost.get("cat_name") +"" );
                         }
 
+
                         for (int i = 0; i < mDataModels.size() ; i++) {
                             String img = "http://rezajax.ir/boy2/img/" + mDataModels.get(i).getImage();
 
@@ -129,6 +131,8 @@ public class RecyclerFragment extends Fragment {
                             forDowwnload.put("position", i);
                             ImageDownloaderTask imgDonloader = new ImageDownloaderTask(getActivity().getBaseContext() , mDataModels ); //context();
                             imgDonloader.execute( forDowwnload );
+
+
                         }
 
 /*
@@ -201,6 +205,16 @@ public class RecyclerFragment extends Fragment {
         return v;
     }
 
+    public static int getResId(String resName, Class<?> c) { //string to resid
+
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 
     private boolean isNetworkConnected() {

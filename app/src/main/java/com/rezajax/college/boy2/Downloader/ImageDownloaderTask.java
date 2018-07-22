@@ -9,6 +9,9 @@ import android.widget.SimpleAdapter;
 
 import com.rezajax.college.boy2.CustomAdapter;
 import com.rezajax.college.boy2.Model.DataModel;
+import com.rezajax.college.boy2.R;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +26,10 @@ public class ImageDownloaderTask extends
     Context mContextBaseContext;
     ArrayList<DataModel> mDataModels;
 
+    String imgUrl;
+    int position;
+
+
     public ImageDownloaderTask(Context mContextBaseContext, ArrayList<DataModel> mDataModels)  {
         this.mContextBaseContext = mContextBaseContext;
         this.mDataModels = mDataModels;
@@ -33,8 +40,8 @@ public class ImageDownloaderTask extends
     {
         InputStream myStream;
 
-        String imgUrl = (String) params[0].get( "image_path" );
-        int position = (Integer) params[0].get( "position" );
+        imgUrl = (String) params[0].get( "image_path" );
+        position = (Integer) params[0].get( "position" );
 
 
         if (!imgUrl.equals("http://rezajax.ir/boy2/img/emp")) {
@@ -54,7 +61,7 @@ public class ImageDownloaderTask extends
                 File cacheDirectory = mContextBaseContext.getCacheDir();
 
                 File temp = new File(cacheDirectory.getPath()
-                        + "/image_" + position + "_" + "add someting dire" + ".png");
+                        + "/image_" + position + ".png"); // + "_" + add_someting_dire
 
                 FileOutputStream outStream = new FileOutputStream(temp);
 
@@ -71,9 +78,10 @@ public class ImageDownloaderTask extends
                 //if (temp.exists()) {
 
                 bitmap.put("image", temp.getPath());
+                //Log.i("intImg" , temp.getPath() );
                 bitmap.put("position", position);
 
-                return (bitmap);
+                return bitmap;
                 //}
 
             } catch (Exception e) {
@@ -84,17 +92,32 @@ public class ImageDownloaderTask extends
 
         }
 
-        return null;
+        HashMap<String, Object> bitmap = new HashMap<>();
+
+        bitmap.put("image", "emp");
+        bitmap.put("position", position);
+        return bitmap;
+
+        //Log.i("intImg" , "return null" );
+        //return null;
     }
 
     @Override
     protected void onPostExecute(HashMap<String, Object> result) {
         //super.onPostExecute(stringObjectHashMap);
 
+        //@Nullable String imgUrl = (String) result.get(  "image" );
+        //int position = (Integer) result.get( "position" );
 
+//        Log.i("intImg" , result.get( "image" ) + "" );
+
+        if (result.get( "image" ) != "emp" ) { //or position
+
+            //Log.i("intImg" , result.get( "image" ) + "" );
 //        SimpleAdapter simpleAdapter = (SimpleAdapter) new SimpleAdapter();
-            CustomAdapter customAdapter = new CustomAdapter(mContextBaseContext, mDataModels);
+            CustomAdapter customAdapter = new CustomAdapter(mContextBaseContext);
             customAdapter.updateData( result );
+        }
 
     }
 }

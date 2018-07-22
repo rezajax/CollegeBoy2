@@ -2,6 +2,8 @@ package com.rezajax.college.boy2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method متد ایجاد کننده ,constructor method متد سازنده
         this.mContext = mContext;
         this.postset = postset;
+    }
+
+    public CustomAdapter(Context mContext ) { //creator method متد ایجاد کننده ,constructor method متد سازنده
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -141,17 +148,50 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         notifyDataSetChanged();
     }*/
     public void updateData(HashMap<String, Object>... updateModel) {
-//        String imgUrl = (String) updateModel[0].get( "image" );
-//        int position = (Integer) updateModel[0].get( "position" );
+        String imgUrl = (String) updateModel[0].get( "image" );
+        int position = (Integer) updateModel[0].get( "position" );
+        //Resources resources = new Resources();
 
-        //postset.get(position).setImage(imgUrl);
-        //notifyDataSetChanged();
+        int cacheResId = mContext.getResources().getIdentifier(imgUrl , null, null);
+        int cacheResId1 = mContext.getResources().getIdentifier("plc",
+                "drawable",
+                mContext.getPackageName());
+
+        Log.i("intImg" , "cacheResId" + cacheResId1 );
+        Log.i("intImg" , "intImg" + imgUrl );
+
+//        postset.get(position).setImage(Resources.getIdentifier(imgUrl , "drawable", getPackageName()));
+        notifyDataSetChanged();
 
         //postset.clear();
         //postset.addAll(dataModel);
         //notifyDataSetChanged();
     }
 
+    /*public void display(ImageView img, String url, final ProgressBar spinner) {
+        imageLoader.displayImage(url, img, options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+                spinner.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                spinner.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                spinner.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
+    }
+    */
     public void addItem(int position, DataModel dataModel) {
         postset.add(position, dataModel);
         notifyItemInserted(position);
@@ -194,7 +234,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewUserName.setText(postset.get(position).getUser_name());
         mTextViewCatName.setText(postset.get(position).getCat_name());
 
-//        mImageViewPost.setImageResource(Integer.parseInt(postset.get(position).getImage()));
+        //Log.i("intImg" , postset.get(position).getImage() + "" );
+        int cacheResId1 = mContext.getResources().getIdentifier("plc",
+                "drawable",
+                mContext.getPackageName());
+        Log.i("Res" , "myRes: " + cacheResId1 + " intRes: " + R.drawable.plc);
+        mImageViewPost.setImageResource(cacheResId1); //R.drawable.plc
+
+//      mImageViewPost.setImageResource(Integer.parseInt(postset.get(position).getImage()));
 
         /*if (postset.get(position).getImage() != null) {
             mimageViewPost.setImageResource(Integer.parseInt( postset.get(position).getImage()));
