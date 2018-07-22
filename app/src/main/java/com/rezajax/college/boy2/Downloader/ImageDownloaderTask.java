@@ -113,8 +113,11 @@ public class ImageDownloaderTask extends
 
         if (result.get( "image" ) != "emp" ) { //or position
 
+
             //Log.i("intImg" , result.get( "image" ) + "" );
-//        SimpleAdapter simpleAdapter = (SimpleAdapter) new SimpleAdapter();
+
+//            AlertController.RecycleListView
+//            SimpleAdapter simpleAdapter = (SimpleAdapter) new CustomAdapter.
             CustomAdapter customAdapter = new CustomAdapter(mContextBaseContext);
             customAdapter.updateData( result );
         }

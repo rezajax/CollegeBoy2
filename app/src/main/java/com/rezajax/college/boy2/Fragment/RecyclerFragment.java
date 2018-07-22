@@ -112,7 +112,7 @@ public class RecyclerFragment extends Fragment {
                                     mapPost.get("text"),
                                     mapPost.get("rate"),
                                     mapPost.get("file"),
-                                    mapPost.get("image"), //mapPost.get("image"), //R.drawable.plc + "",
+                                    R.drawable.plc + "", //mapPost.get("image"), //R.drawable.plc + "",
                                     mapPost.get("date"),
                                     mapPost.get("user_name"),
                                     mapPost.get("cat_name"),

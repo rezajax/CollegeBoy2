@@ -63,7 +63,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         myViewHolder.mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, String.format("LinearLayout_profile%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
+                Toast.makeText(mContext, String.format("LinearLayout_profile%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -79,13 +79,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 if (postset.get(myViewHolder.getAdapterPosition()).getName().equals("فیبر نوری")) {
 
                     intent.putExtra("image", "R.drawable.plc");
-                    Toast.makeText(mContext, String.format("plc" + R.drawable.plc, myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
+                    Toast.makeText(mContext, String.format("plc" + R.drawable.plc, myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();
                 } else {
                    // intent.putExtra("image", R.drawable.college2);
                 }
-                mContext.startActivity(intent);
+                //mContext.startActivity(intent);
 
-                Toast.makeText(mContext, String.format("LinearLayout_post%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();;
+                Toast.makeText(mContext, String.format("LinearLayout_post%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();
+
+                addItem(myViewHolder.getAdapterPosition(), new DataModel("سلام",
+                        "سلام",
+                        "سلام",
+                        "3",
+                        "a",
+                        "a",
+                        "2018-07-12 17:26:56",
+                        "دکتر محمدی",
+                        "الکترونیک",
+                        "1"
+                ));
             }
         });
 
@@ -235,10 +247,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewCatName.setText(postset.get(position).getCat_name());
 
         //Log.i("intImg" , postset.get(position).getImage() + "" );
-        int cacheResId1 = mContext.getResources().getIdentifier("plc",
+        int cacheResId1 = mContext.getResources().getIdentifier("electronic",
                 "drawable",
                 mContext.getPackageName());
-        Log.i("Res" , "myRes: " + cacheResId1 + " intRes: " + R.drawable.plc);
+        Log.i("Res" , "myRes: " + cacheResId1 + " intRes: " + R.drawable.electronic);
         mImageViewPost.setImageResource(cacheResId1); //R.drawable.plc
 
 //      mImageViewPost.setImageResource(Integer.parseInt(postset.get(position).getImage()));
