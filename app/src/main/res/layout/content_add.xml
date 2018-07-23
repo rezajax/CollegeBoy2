@@ -24,7 +24,14 @@
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="متن هدر"/>
+            android:hint="متن پیش نمایش"/>
+
+        <EditText
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+
+            android:hint="متن اصلی"/>
 
         <!--<Button-->
             <!--android:layout_marginHorizontal="45dp"-->

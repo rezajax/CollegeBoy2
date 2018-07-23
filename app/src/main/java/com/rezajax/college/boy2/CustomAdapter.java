@@ -28,6 +28,8 @@ import com.rezajax.college.boy2.Model.DataModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private ArrayList<DataModel> postset;
@@ -35,13 +37,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     boolean like;
     public Vibrator vib;
 
-    public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method متد ایجاد کننده ,constructor method متد سازنده
+
+    public CustomAdapter(Context mContext,ArrayList<DataModel> postset ) { //creator method
         this.mContext = mContext;
         this.postset = postset;
     }
 
     public CustomAdapter(Context mContext ) { //creator method متد ایجاد کننده ,constructor method متد سازنده
         this.mContext = mContext;
+
     }
 
     @NonNull
@@ -83,21 +87,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 } else {
                    // intent.putExtra("image", R.drawable.college2);
                 }
-                //mContext.startActivity(intent);
+                mContext.startActivity(intent);
 
                 Toast.makeText(mContext, String.format("LinearLayout_post%d", myViewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();
 
-                addItem(myViewHolder.getAdapterPosition(), new DataModel("سلام",
+               /* addItem(myViewHolder.getAdapterPosition(), new DataModel("سلام",
                         "سلام",
                         "سلام",
                         "3",
                         "a",
-                        "a",
+                        R.drawable.background2,
                         "2018-07-12 17:26:56",
                         "دکتر محمدی",
                         "الکترونیک",
                         "1"
-                ));
+                ));*/
             }
         });
 
@@ -162,6 +166,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void updateData(HashMap<String, Object>... updateModel) {
         String imgUrl = (String) updateModel[0].get( "image" );
         int position = (Integer) updateModel[0].get( "position" );
+
+        Log.i("updateData" , "image: " + updateModel[0].get( "image" ) );
+        Log.i("updateData" , "position: " + updateModel[0].get( "position" ) );
         //Resources resources = new Resources();
 
         int cacheResId = mContext.getResources().getIdentifier(imgUrl , null, null);
@@ -172,8 +179,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Log.i("intImg" , "cacheResId" + cacheResId1 );
         Log.i("intImg" , "intImg" + imgUrl );
 
+        //postset.get(position).setImage(R.drawable.profile);
+
+        /*if (myViewHolder.getAdapterPosition() == position ) {
+            myViewHolder.mImageView.setImageResource(R.drawable.profile);
+        }*/
+
 //        postset.get(position).setImage(Resources.getIdentifier(imgUrl , "drawable", getPackageName()));
-        notifyDataSetChanged();
+        /*notifyDataSetChanged();*/
 
         //postset.clear();
         //postset.addAll(dataModel);
@@ -226,18 +239,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         LinearLayout mLinearLayout = holder.mProfile;
         ImageView mImageViewPost = holder.mImageView;
         //TextView mTextViewLike = holder.mTextViewLike;        text number of like
+        CircleImageView mImageViewProfile = holder.mImageViewProfile;
 
 
 
         ImageView imageView = holder.mImageView;
 ////        textViewName.setText(R.string.app_name);
 ////        textViewName.setText(R.string.navigation_drawer_open);
-        imageView.setImageResource(R.drawable.electronic);
+        //imageView.setImageResource(R.drawable.electronic);
 
-        if (postset.get(position).getName().equals("فیبر نوری")) {
+        /*if (postset.get(position).getName().equals("فیبر نوری")) {
 
             imageView.setImageResource(R.drawable.plc);
-        }
+        }*/
 
         mTextViewName.setText(postset.get(position).getName());
         mTextViewHeader.setText(postset.get(position).getHeader());
@@ -246,14 +260,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         mTextViewUserName.setText(postset.get(position).getUser_name());
         mTextViewCatName.setText(postset.get(position).getCat_name());
 
-        //Log.i("intImg" , postset.get(position).getImage() + "" );
-        int cacheResId1 = mContext.getResources().getIdentifier("electronic",
-                "drawable",
-                mContext.getPackageName());
-        Log.i("Res" , "myRes: " + cacheResId1 + " intRes: " + R.drawable.electronic);
-        mImageViewPost.setImageResource(cacheResId1); //R.drawable.plc
+
+
+        if (postset.get(position).getName().equals("فیبر نوری")) {
+
+//            postset.get(position).setImage(R.drawable.plc);
+//            notifyItemChanged(position);
+
+            imageView.setImageResource(R.drawable.plc);
+        } else {
+            //Log.i("intImg" , postset.get(position).getImage() + "" );
+            int cacheResId1 = mContext.getResources().getIdentifier("electronic",
+                    "drawable",
+                    mContext.getPackageName());
+            Log.i("Res" , "myRes: " + cacheResId1 + " intRes: " + R.drawable.electronic);
+            mImageViewPost.setImageResource(postset.get(position).getImage()); //R.drawable.plc  cacheResId1
+
+        }
 
 //      mImageViewPost.setImageResource(Integer.parseInt(postset.get(position).getImage()));
+
 
         /*if (postset.get(position).getImage() != null) {
             mimageViewPost.setImageResource(Integer.parseInt( postset.get(position).getImage()));
@@ -262,8 +288,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }*/
 
         Log.i("is",postset.get(position).getIs_stu() );
-        if (Integer.parseInt(postset.get(position).getIs_stu()) == 0) {
-            mLinearLayout.setBackgroundColor(Color.parseColor("#DC143C"));
+        if (Integer.parseInt(postset.get(position).getIs_stu()) == 1) {
+            mLinearLayout.setBackgroundColor(Color.parseColor("#125688")); //blue
+            mImageViewProfile.setBorderColor(Color.parseColor("#125688"));
+        } else {
+            mLinearLayout.setBackgroundColor(Color.parseColor("#DC143C")); //red
+        }
+
+        if (postset.get(position).getUser_name().equals("محمدرضا حیدری")) {
+            mImageViewProfile.setImageResource(R.drawable.rezajax);
+        } else {
+            mImageViewProfile.setImageResource(R.drawable.profile4);
         }
 
 
@@ -294,6 +329,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         LinearLayout mPost;
 
         ImageView mImageView;
+        CircleImageView mImageViewProfile;
 
         LinearLayout like;
 
@@ -334,6 +370,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             this.mPost = itemView.findViewById(R.id.card_post);
 
             this.mImageView = itemView.findViewById(R.id.card_image);
+            this.mImageViewProfile = itemView.findViewById(R.id.card_image_profile);
         }
     }
 

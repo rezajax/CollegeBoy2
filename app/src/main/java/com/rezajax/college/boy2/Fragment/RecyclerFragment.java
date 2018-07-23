@@ -53,6 +53,7 @@ public class RecyclerFragment extends Fragment {
     ArrayList<DataModel> mDataModels;
 
     private Context mContext;
+    private Context mContextBase;
     private SQLiteDatabase mDatabase;
 
     @Override
@@ -66,6 +67,7 @@ public class RecyclerFragment extends Fragment {
         sRecyclerView = v.findViewById(R.id.my_recycler); //ok
 
 
+        mContextBase = getActivity().getBaseContext();
 
 
         mContext = getContext().getApplicationContext();
@@ -107,12 +109,17 @@ public class RecyclerFragment extends Fragment {
                             //List<String> list1 = post.get(i);
                             mapPost = post.get(i);
 
+                            int cacheResId1 = mContext.getResources().getIdentifier("electronic",
+                                    null,
+                                    mContextBase.getPackageName());
+
                             mDataModels.add(new DataModel(mapPost.get("name"),
                                     mapPost.get("header"),
                                     mapPost.get("text"),
                                     mapPost.get("rate"),
                                     mapPost.get("file"),
-                                    R.drawable.plc + "", //mapPost.get("image"), //R.drawable.plc + "",
+
+                                    R.drawable.electronic, //mapPost.get("image"), //R.drawable.plc + "",
                                     mapPost.get("date"),
                                     mapPost.get("user_name"),
                                     mapPost.get("cat_name"),

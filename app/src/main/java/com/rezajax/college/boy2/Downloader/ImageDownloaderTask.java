@@ -68,6 +68,7 @@ public class ImageDownloaderTask extends
                 Bitmap b = BitmapFactory.decodeStream(myStream);
 
                 b.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                Log.i("Bitmap" , "Bitmap" +  b.toString() );
 
                 outStream.flush();
 
@@ -114,12 +115,14 @@ public class ImageDownloaderTask extends
         if (result.get( "image" ) != "emp" ) { //or position
 
 
-            //Log.i("intImg" , result.get( "image" ) + "" );
+
+//            Log.i("intImg" , result.get( "image" ) + "" );
 
 //            AlertController.RecycleListView
 //            SimpleAdapter simpleAdapter = (SimpleAdapter) new CustomAdapter.
             CustomAdapter customAdapter = new CustomAdapter(mContextBaseContext);
             customAdapter.updateData( result );
+
         }
 
     }

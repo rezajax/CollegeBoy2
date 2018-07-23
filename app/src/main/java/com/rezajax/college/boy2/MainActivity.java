@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView btn = findViewById(R.id.btn_font);
+        /*TextView btn = findViewById(R.id.btn_font);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/irsans.ttf");
-        btn.setTypeface(typeface);
+        btn.setTypeface(typeface);*/
 
         Log.i("context", "getApplicationContext: " + getApplicationContext()
                 + " this: " + this
@@ -383,9 +383,9 @@ public class MainActivity extends AppCompatActivity
 
                 //make_category_list();
                 break;
-            case R.id.nav_account:
+            /*case R.id.nav_account:
                 fragment = new AccountFragment();
-                break;
+                break;*/
             case R.id.nav_setting:
                 Intent intent = new Intent(MainActivity.this , SettingActivity.class);
                 MainActivity.this.startActivity(intent);
@@ -416,13 +416,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_account) {
+        //} else if (id == R.id.nav_account) {
 
         } else if (id == R.id.nav_setting) {
 
-        } else if (id == R.id.nav_share) {
+        //} else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        //} else if (id == R.id.nav_send) {
 
         }
 

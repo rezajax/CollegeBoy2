@@ -13,13 +13,13 @@ public class DataModel {
     String text;
     String rate;
     String file;
-    String image;
+    int image;
     String date;
     String user_name;
     String cat_name;
     String is_stu;
 
-    public DataModel(String name, String header, String text, String rate, String file, String image, String date, String user_name, String cat_name, String is_stu) {
+    public DataModel(String name, String header, String text, String rate, String file, int image, String date, String user_name, String cat_name, String is_stu) {
         this.name = name;
         this.header = header;
         this.text = text;
@@ -33,11 +33,11 @@ public class DataModel {
 
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 
